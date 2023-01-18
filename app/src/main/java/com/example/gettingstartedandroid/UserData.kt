@@ -1,5 +1,4 @@
 package com.example.androidgettingstarted
-import kotlinx.parcelize.Parcelize
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.LiveData

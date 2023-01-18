@@ -1,19 +1,13 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    //id 'kotlin-android-extensions' // added this plugin
-   // id "org.jetbrains.kotlin.android.extensions"
-  // kotlin("android.extensions") error for this
-    id("kotlin-parcelize")
-    id "org.jetbrains.kotlin.plugin.parcelize" version "1.8.0"
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+
 }
 
-
-
 android {
-    namespace 'com.example.gettingstartedandroid'
-    compileSdk 33
-
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.example.gettingstartedandroid"
         minSdk 26
@@ -23,12 +17,20 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    lintOptions {
+        checkReleaseBuilds false
+    }
     buildTypes {
+
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true
+            //multiDexKeepFile file('multidex-config.txt')
+
+            debuggable false
         }
+        debug {
+    }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -38,20 +40,26 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-        viewBinding true
+        //noinspection DataBindingWithoutKapt
+        dataBinding = true
+        viewBinding = true
+    }
+
+    dataBinding {
+        enabled = true
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.0"//$kotlin_version
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.6.20"//$kotlin_version
+    implementation 'androidx.core:core-ktx:1.5.1'
     implementation 'androidx.appcompat:appcompat:1.6.0'
-    implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'androidx.core:core-ktx:+'
     implementation 'androidx.core:core-ktx:+'
+    implementation 'com.google.android.material:material:1.6.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
