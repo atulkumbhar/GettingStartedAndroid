@@ -7,18 +7,22 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gettingstartedandroid.R
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import com.example.gettingstartedandroid.databinding.ActivityMainBinding
+
+
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+       // setContentView(R.layout.activity_main)
+        setSupportActionBar(binding.toolbar)
 
         // prepare our List view and RecyclerView (cells)
-        setupRecyclerView(item_list)
+        setupRecyclerView(binding.itemList)
     }
 
     // recycler view is the list of cells
